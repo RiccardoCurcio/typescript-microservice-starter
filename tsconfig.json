@@ -1,0 +1,34 @@
+{
+  "compilerOptions": {
+    "types": [
+      "node"
+    ],
+    "target": "es6",
+    "lib": [
+      "es2021"
+    ],
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "baseUrl": "./app",
+    "paths": {
+      "@/*": [
+        "./*"
+      ]
+    },
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": "build",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "skipLibCheck": true
+  },
+  "compileOnSave": true,
+  "include": [
+    "app/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
