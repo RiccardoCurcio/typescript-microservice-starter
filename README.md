@@ -7,7 +7,7 @@ Node version 16.0.0 or more
 * express
 * jest
 * nodemon
-* memcached
+* memcached (mcrouter supported)
 
 
 # Getting Started
