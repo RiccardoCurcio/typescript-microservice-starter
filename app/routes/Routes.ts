@@ -1,11 +1,11 @@
 import { Express } from "express-serve-static-core";
-import { Client } from 'memjs';
+import { MemcacheClient } from "memcache-client";
 
 /**
  * 
  * @param app Express
  */
-const routes = (app: Express, memcached: Client | null) => {
+const routes = (app: Express, memcached: MemcacheClient | null) => {
 
     app.get('/healthcheck', async (_req, res) => {
         res.status(200).json({ message: `healthcheck success!` });

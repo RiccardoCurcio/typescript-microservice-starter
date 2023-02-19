@@ -1,31 +1,26 @@
 import logger from '@/logger/Logger';
-import { Client } from 'memjs';
+import {
+    MemcacheClient,
+    StatsCommandResponse,
+} from "memcache-client";
 
 const MemcachedConnection = async () => {
-    var connecting: Client;
+    var connecting: MemcacheClient | null = null;
     if (parseInt(process.env.MEMCACHED_ENABLE || "0")) {
 
-        const cluster = process.env.MEMCACHED_CLUSTER || "";
-        connecting = Client.create(cluster, {
-            retries: 2,
-            timeout: 100
-        });
-        logger.info('[Memcached - Connection.js]', { message: `connecting to ${(cluster.split(',')).join()}` });
-        connecting.stats((error, server, stats) => {
-            
-            if (!error) {
-                logger.info('[Memcached - Connection.js]', {message: `conected to ${server}`});
-            } else {
-                process.env.MEMCACHED_ENABLE = "0";
-                logger.error('[Memcached - Connection.js]', { message: error?.message });
-                logger.warn('[Memcached - Connection.js]', { message: `Memcached has been disabled; MEMCACHED_ENABLE set ${process.env.MEMCACHED_ENABLE}` });
-            }
-            
-        });
-        return connecting;
+        const server = process.env.MEMCACHED_CLUSTER || "";
 
+        connecting = new MemcacheClient({ server, ignoreNotStored: true });
+        logger.info('[Memcached - Connection.js]', { message: `connecting to ${(server.split(',')).join()}` });
+        connecting.cmd<StatsCommandResponse>("stats").then((r) => {
+            logger.info('[Memcached - Connection.js]', { message: `connected to ${(server.split(',')).join()}` });
+        }, (error) => {
+            process.env.MEMCACHED_ENABLE = "0"
+            logger.warn('[Memcached - Connection.js]', { message: `MEMCACHED_ENABLE set to 0` });
+            logger.error('[Memcached - Connection.js]', { message: error });
+        });
     }
-    return null;
+    return connecting;
 }
 
 export default MemcachedConnection;
