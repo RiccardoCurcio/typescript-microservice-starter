@@ -7,6 +7,7 @@ Node version 16.0.0 or more
 * express
 * jest
 * nodemon
+* memcached (mcrouter supported)
 
 
 # Getting Started
@@ -32,6 +33,10 @@ ADDRESS=0.0.0.0
 
 MAX_CPU=4 # default 0 max possible cpu
 DISABLE_SCALING=1 # default 0
+
+# MEMCACHED
+MEMCACHED_ENABLE=1 # default 0
+MEMCACHED_CLUSTER=127.0.0.1:11211,127.0.0.1:11212
 
 ```
 
