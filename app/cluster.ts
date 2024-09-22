@@ -33,7 +33,7 @@ if (major >= 16) {
 
     disableScaling !== 0 ? noForkProcess() : startCluster();
 } else {
-    logger.error('[Node]', { message: `${process.env.SERVICE_NAME} needs node to version v16.0.0 or more but current version is ${process.version}` });
+    logger.error('[Node]', { message: `${process.env.SERVICE_NAME || "NO-SERVICE-NAME" } needs node to version v16.0.0 or more but current version is ${process.version}` });
     console.log('If you use nvm you can set the version: nvm use v16.15.6');
 }
 

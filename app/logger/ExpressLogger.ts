@@ -13,7 +13,7 @@ const expressLogger = expressWinston.logger({
     ],
     format: combine(
         format.json(),
-        label({ label: process.env.SERVICE_NAME }),
+        label({ label: process.env.SERVICE_NAME || "NO-SERVICE-NAME"}),
         timestamp(),
         CustomFormat
     ),
