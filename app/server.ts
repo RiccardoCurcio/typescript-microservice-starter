@@ -6,6 +6,7 @@ import expressLogger from '@/logger/ExpressLogger';
 import logger from '@/logger/Logger';
 import routes from '@/routes/Routes';
 import MemcachedConnection from '@/memcached/MemcachedConnection';
+import MongoConnection from './db/mongodb/MongoConnection';
 
 
 const serverIstance = async () => {
@@ -13,6 +14,7 @@ const serverIstance = async () => {
     const port = parseInt(process.env.PORT || "3000");
     const hostname = process.env.ADDRESS || "0.0.0.0";
     const memcached = await MemcachedConnection();
+    await MongoConnection()
     const app = express();
     
     app.use(expressLogger);
