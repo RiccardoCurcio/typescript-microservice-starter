@@ -83,7 +83,7 @@ $ npm run test
 
 Request
 ``` 
-GET http://localhost:8081/healthcheck
+GET http://localhost:8081/v1/healthcheck
 ```
 
 Response success
